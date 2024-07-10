@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prac12b</title>
+</head>
+
+<body>
+    <h1>Registration Form</h1>
+    <form>
+        <label for="userid">User id:</label>
+        <input id="userid" type="text" minlength="5" maxlength="12" required><br>
+        <label for="password">Password:</label>
+        <input id="password" type="text" minlength="7" maxlength="12" required><br>
+        <label for="name">Name:</label>
+        <input id="name" type="text" maxlength="50" required><br>
+        <label id="address">Address:</label>
+        <input id="address" type="text"><br>
+        <label id="country">Country:</label>
+        <select id="country">
+            <option value="singapore">Singapore</option>
+            <option value="rubbish">Somewhere else</option>
+        </select><br> 
+        <label id="zipcode">ZIP Code:</label>
+        <input id="zipcode" type="number" required><br>
+        <label id="email">Email:</label>
+        <input id="email" type="email" required><br>
+        Sex:<input type="radio" id="male" name="sex" value="Male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="sex" value="Female">
+        <label for="female">Female</label><br>
+        Language:<input type="checkbox" id="english" value="English">
+        <label for="english">English</label>
+        <input type="checkbox" id="nonenglish" value="nonEnglish">
+        <label for="nonenglish">Non-English</label><br>
+        <label for="about">About:</label><br>
+        <textarea name="about" id="about" cols="50" rows="10" required></textarea><br>
+        <button>Submit</button>
+    </form>
+</body>
