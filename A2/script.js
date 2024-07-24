@@ -234,27 +234,15 @@ resetBtn.addEventListener("click", function() {
 	clearInterval(move);
 });
 upBtn.addEventListener("mousedown", function() {
-    move = setInterval(function() {MovePos(0,-1);},50);
-});
-upBtn.addEventListener("mouseup", function() {
-	clearInterval(move);
+    MovePos(0,-5);
 });
 downBtn.addEventListener("mousedown", function() {
-    move = setInterval(function() {MovePos(0,1);},50);
-});
-downBtn.addEventListener("mouseup", function() {
-	clearInterval(move);
+    MovePos(0,5);
 });
 leftBtn.addEventListener("mousedown", function() {
-    move = setInterval(function() {MovePos(-1,0);},50);
-});
-leftBtn.addEventListener("mouseup", function() {
-	clearInterval(move);
+    MovePos(-5,0);
 });
 rightBtn.addEventListener("mousedown", function() {
-    move = setInterval(function() {MovePos(1,0);},50);
-});
-rightBtn.addEventListener("mouseup", function() {
-	clearInterval(move);
+    MovePos(5,0);
 });
 
