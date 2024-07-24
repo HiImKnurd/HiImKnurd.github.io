@@ -25,9 +25,18 @@ const rightBtn = document.querySelector("#rightBtn");
 const upBtn = document.querySelector("#upBtn");
 const downBtn = document.querySelector("#downBtn");
 const resetBtn = document.querySelector("#resetBtn");
-const controls = document.querySelector(".controls")
-
-var lookX = lookY = 50;
+const controls = document.querySelector(".controls");
+var move;
+//Coords for looking around
+var lookX = 50;
+var lookY = 50;
+//Minigame stuff
+var clicktimer;
+const target = document.querySelector("#target");
+const gamestart = document.querySelector("#gamestart");
+const gamemessage = document.querySelector("#gamemessage");
+var gameactive = false;
+var spawn;
 
 //toggle sidebar on mobile
 function togglemenu(){
@@ -75,7 +84,6 @@ function setmacularactive() {
 function resetsim() {
 	if (glaucomaactive) setglaucomaactive();
 	if (macularactive) setmacularactive();
-    ResetPos();
 }
 function checklookactive() {
 	if (glaucomaactive || macularactive) {
@@ -115,18 +123,65 @@ function UpdateLook(){
     }
     else if(macularactive){
         macular.style.background = 
-        'radial-gradient(circle 475px at ' + lookX+'% ' + lookY+'%, black, rgba(0,0,0,0.98), transparent';
+        'radial-gradient(circle 525px at ' + lookX+'% ' + lookY+'%, black, rgba(0,0,0,0.98), transparent';
     }
 }
+//Game functions
+function RandomNumber(max){
+	return Math.floor(Math.random() * max);
+}
+function BeginGame(){
+	if(gameactive){
+		console.log(target);
+		target.style.display = "none";
+		gamemessage.style.display = "block";
+		spawn = setInterval(SpawnTarget, 100);
+		
+	}
+	else{
+		target.style.display = "none";
+		clearInterval(spawn);
+	}
+}
+function SpawnTarget(){
+	if(target.style.display == "none"){
+		console.log("spawn");
+		clicktimer = new Date().getTime();
+		target.style.display = "block";
+		target.style.left = RandomNumber(80) + "%";
+		target.style.top = RandomNumber(80) + "%";
+	}
+}
+
 window.onresize = function() {
 	width = window.innerWidth;
 	console.log(width);
 };
 
+//minigame listeners
+target.addEventListener("click", function(){
+	let currenttime = new Date().getTime();
+	let timetaken = (currenttime - clicktimer) / 1000; 
+	gamemessage.textContent = "Took " + timetaken + "s to click.";
+	target.classList.add("targetAnim");
+});
+target.addEventListener("animationend", function() {
+	target.style.display = "none";
+	target.classList.remove("targetAnim");
+});
+
+gamestart.addEventListener("click", function() {
+	gameactive = !gameactive;
+	gamemessage.style.display = "none";
+	BeginGame();
+});
+
+
+
 //Hamburger menu event
 menu.addEventListener("click", function() {
     togglemenu();
-})
+});
 
 //Collapse/show content on mobile
 total.addEventListener("click", function() {
@@ -148,7 +203,7 @@ macularBtn.addEventListener("click", function() {
 });
 
 //PC controls
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', function(e) {
     if(lookactive){
         console.log(e.key);
         switch(e.key){
@@ -165,6 +220,7 @@ document.addEventListener('keydown', (e) => {
                 MovePos(2,0);
                 break;
             case "Escape":
+				ResetPos();
                 resetsim();
                 break;
         }
@@ -173,17 +229,32 @@ document.addEventListener('keydown', (e) => {
 
 //mobile controls
 resetBtn.addEventListener("click", function() {
+	ResetPos();
 	resetsim();
+	clearInterval(move);
 });
 upBtn.addEventListener("mousedown", function() {
-    MovePos(0,-4);
-})
+    move = setInterval(function() {MovePos(0,-1);},50);
+});
+upBtn.addEventListener("mouseup", function() {
+	clearInterval(move);
+});
 downBtn.addEventListener("mousedown", function() {
-    MovePos(0,4);
-})
+    move = setInterval(function() {MovePos(0,1);},50);
+});
+downBtn.addEventListener("mouseup", function() {
+	clearInterval(move);
+});
 leftBtn.addEventListener("mousedown", function() {
-    MovePos(-4,0);
-})
+    move = setInterval(function() {MovePos(-1,0);},50);
+});
+leftBtn.addEventListener("mouseup", function() {
+	clearInterval(move);
+});
 rightBtn.addEventListener("mousedown", function() {
-    MovePos(4,0);
-})
+    move = setInterval(function() {MovePos(1,0);},50);
+});
+rightBtn.addEventListener("mouseup", function() {
+	clearInterval(move);
+});
+

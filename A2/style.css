@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+  }
 body{
     background-color: rgb(246, 246, 246);
     color:black;
@@ -52,10 +55,6 @@ nav .title:hover{
 }
 #menu{
     display: none;
-}
-#menu:hover{
-    background-color: white;
-    border-radius: 25%;
 }
 /*beginning body section*/
 h1{text-align: center;}
@@ -146,6 +145,7 @@ p{
     font-weight: bold;
     font-size: 15px;
 }
+/* The simulation */
 #glaucoma{
     position:fixed;
     inset:0;
@@ -164,7 +164,7 @@ p{
     display: none;
     pointer-events: none;
     background: radial-gradient(
-        circle 475px at 50% 50%,
+        circle 525px at 50% 50%,
         black, rgba(0, 0, 0, 0.98), transparent
     );
 }
@@ -175,6 +175,9 @@ p{
     position: relative;
     font-size: 30px;
     border: 2px solid black;
+}
+.simbuttons:hover{
+    background-color: greenyellow;
 }
 .mobilecontrols{
     font-size: 20px;
@@ -225,6 +228,74 @@ p{
     background-color: black;
     display: none;
 }
+/* Minigame */
+#minigame{
+    font-size: 50px;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+#gamestart{
+    position:relative;
+    text-align: center;
+    font-size: 30px;
+    background: blue;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-right: 20%;
+    font-weight: bold;
+    color: white;
+    z-index:4;
+    margin-top: 7%;
+}
+#gamestart:hover{
+    background-color: greenyellow;
+    color: black;
+}
+#gamearea{
+    width:100%;
+    height:80vh;
+    border: 3px solid gray;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+    z-index: 4;
+}
+#gamemessage{
+    z-index: 4;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    position:relative;
+    color: white;
+    background-color: black;
+    width:50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 5px;
+}
+#target{
+    width: 10%;
+    height: 10%;
+    position: relative;
+    background-color: red;
+    font-weight: bold;
+    color: white;
+    border: 3px solid black;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 3%;
+    display:none;
+    left:0;
+    top:0;
+}
+@keyframes targetframes{
+    0% {width:10%;height:10%;}
+    10% {width:15%;height:15%;margin-right: 5%;margin-left: 0%;font-size: 18px;}
+    100%{width:0%;height:0%;display:none;margin-left:5%;margin-right: 0%;font-size:0px}
+}
+.targetAnim{
+    animation: targetframes 0.5s;
+}
 @media screen and (max-width:800px){
     #menu{
         display:block;
@@ -248,11 +319,11 @@ p{
     #anchors > a{
         display:block;
         width:100%;
-        font-size: 20px;
+        font-size: 17px;
         margin-top: 20%;
     }
     #anchors > a:hover{
-        font-size: 22px;
+        font-size: 20px;
     }
     #intro2 {flex-direction: column;}
     #intro2 div{margin-bottom: 10%;}
